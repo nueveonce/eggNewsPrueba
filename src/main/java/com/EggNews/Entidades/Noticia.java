@@ -13,24 +13,24 @@ public class Noticia {
     @Id
     @GeneratedValue(generator = "uuid") // el valor del ID se va a generar de manera automatica.
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String idNoticia;
+    private String id_noticia;
     private String titulo;
     private String resumen;
     private String cuerpo;
     
     @Temporal(TemporalType.DATE)
-    private Date fechaNoticia;
+    private Date fecha_noticia;
     private String imagen;
 
     public Noticia() {
     }
 
-    public String getIdNoticia() {
-        return idNoticia;
+    public String getId_noticia() {
+        return id_noticia;
     }
 
-    public void setIdNoticia(String idNoticia) {
-        this.idNoticia = idNoticia;
+    public void setId_noticia(String id_noticia) {
+        this.id_noticia = id_noticia;
     }
 
     public String getTitulo() {
@@ -57,12 +57,12 @@ public class Noticia {
         this.cuerpo = cuerpo;
     }
 
-    public Date getFechaNoticia() {
-        return fechaNoticia;
+    public Date getFecha_noticia() {
+        return fecha_noticia;
     }
 
-    public void setFechaNoticia(Date fechaNoticia) {
-        this.fechaNoticia = fechaNoticia;
+    public void setFecha_noticia(Date fecha_noticia) {
+        this.fecha_noticia = fecha_noticia;
     }
 
     public String getImagen() {
@@ -73,5 +73,6 @@ public class Noticia {
         this.imagen = imagen;
     }
 
+ 
     
 }

@@ -1,7 +1,7 @@
 package com.EggNews.Servicios;
 
 import com.EggNews.Entidades.Noticia;
-import com.EggNews.MiException;
+import com.EggNews.Excepciones.MiException;
 import com.EggNews.Respositorios.NoticiaRepositorio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,13 +27,13 @@ public class NoticiaServicios {
     ANOTADOS COMO TRANSACTIONAL
      */
     public void crearNoticia(String titulo, String resumen, String cuerpo, String imgen) throws MiException {
-        validarDatos(titulo, resumen, cuerpo, imgen);
+        validarDatos(titulo, resumen, cuerpo);
         Noticia noticia = new Noticia();
 
         noticia.setTitulo(titulo);
         noticia.setResumen(resumen);
         noticia.setCuerpo(cuerpo);
-        noticia.setFechaNoticia(new Date());
+        noticia.setFecha_noticia(new Date());
         noticia.setImagen(imgen);
 
         noticiaRepositorio.save(noticia);
@@ -50,7 +50,7 @@ public class NoticiaServicios {
     @Transactional
     public void modificarNoticia(String titulo, String resumen, String cuerpo, String imgen, String idNoticia) throws MiException {
         
-        validarDatos(titulo, resumen, cuerpo, imgen);
+        validarDatos(titulo, resumen, cuerpo);
         Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
 
         if (respuesta.isPresent()) {
@@ -66,7 +66,7 @@ public class NoticiaServicios {
         }
     }
 
-    public void validarDatos(String titulo, String resumen, String cuerpo, String imgen) throws MiException {
+    public void validarDatos(String titulo, String resumen, String cuerpo) throws MiException {
 
         if (titulo == null || titulo.isEmpty()) {
             throw new MiException("EL TITULO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");

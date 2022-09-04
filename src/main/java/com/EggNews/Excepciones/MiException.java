@@ -1,5 +1,5 @@
 
-package com.EggNews;
+package com.EggNews.Excepciones;
 
 
 public class MiException extends Exception{
