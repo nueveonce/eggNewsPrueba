@@ -26,7 +26,7 @@ public class NoticiaServicios {
     TODOS LOS METODOS QUE GENEREN MODIFICACIONES PERMANENTES EN LA BASE DE DATOS DEBEN SER
     ANOTADOS COMO TRANSACTIONAL
      */
-    public void crearNoticia(String titulo, String resumen, String cuerpo, String imgen) throws MiException {
+    public void crearNoticia(String titulo, String resumen, String cuerpo/*, String imgen*/) throws MiException {
         validarDatos(titulo, resumen, cuerpo);
         Noticia noticia = new Noticia();
 
@@ -34,7 +34,7 @@ public class NoticiaServicios {
         noticia.setResumen(resumen);
         noticia.setCuerpo(cuerpo);
         noticia.setFecha_noticia(new Date());
-        noticia.setImagen(imgen);
+        //noticia.setImagen(imgen);
 
         noticiaRepositorio.save(noticia);
 
@@ -48,7 +48,7 @@ public class NoticiaServicios {
     }
 
     @Transactional
-    public void modificarNoticia(String titulo, String resumen, String cuerpo, String imgen, String idNoticia) throws MiException {
+    public void modificarNoticia(String titulo, String resumen, String cuerpo, /*String imgen,*/ String idNoticia) throws MiException {
         
         validarDatos(titulo, resumen, cuerpo);
         Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
@@ -60,7 +60,7 @@ public class NoticiaServicios {
             noticia.setTitulo(titulo);
             noticia.setResumen(resumen);
             noticia.setCuerpo(cuerpo);
-            noticia.setImagen(imgen);
+            //noticia.setImagen(imgen);
 
             noticiaRepositorio.save(noticia);
         }

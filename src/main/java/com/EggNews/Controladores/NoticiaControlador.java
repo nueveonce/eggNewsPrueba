@@ -1,5 +1,10 @@
 package com.EggNews.Controladores;
 
+import com.EggNews.Excepciones.MiException;
+import com.EggNews.Servicios.NoticiaServicios;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,15 +15,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/noticia") // localhost:8080/noticia
 public class NoticiaControlador {
 
+    @Autowired
+    private NoticiaServicios notServ;
+
     @GetMapping("/altanoticia") //localhost:8080/noticia/altanoticia
     public String registrar() {
         return "alta_noticia.html";
     }
 
     @PostMapping("/altanoticia")
-    public String alta(@RequestParam String titulo_noticia) {
-        System.out.println("TITULO NOTICIA: " + titulo_noticia);
+    public String altanoticia(@RequestParam String titulo_noticia, @RequestParam String resumen_noticia, @RequestParam String cuerpo) {
+        try {
+            notServ.crearNoticia(titulo_noticia, resumen_noticia, cuerpo);
+        } catch (MiException ex) {
+            Logger.getLogger(NoticiaControlador.class.getName()).log(Level.SEVERE, null, ex);
         return "alta_noticia.html";
+        }
+        return "index.html";
     }
 
 }
