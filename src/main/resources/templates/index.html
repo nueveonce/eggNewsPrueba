@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>TODO supply a title</title>
@@ -16,6 +16,14 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand">EggNews</a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+    </nav>
     <header>
         <div class="container">
             <h1>EGG NEWS</h1>
@@ -24,15 +32,31 @@
 
     <div class="container">
         <section class="main row">
-            <article class="col-md-9">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus aut ipsa, possimus placeat harum
-                aspernatur! Animi nulla accusamus labore rem natus, nostrum ducimus repellat, possimus eligendi
-                asperiores amet autem debitis.
+            <article  class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        th:each="not : ${noticia}"
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">th:text="${not.titulo}</h5>
+                        <p class="card-text" >th:text="${not.cuerpo}</p>
+                        <a href="#" class="btn btn-success">MAS</a>
+                    </div>
+                </div>
             </article>
-            <aside class="col-md3">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. At consectetur nobis tempore maiores
-                aspernatur libero animi veniam, ipsum dolor. Ratione iste unde velit ipsa distinctio, vel quis
-                doloremque nostrum repudiandae.
+            <aside class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        DESTACADO
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, nostrum!
+                            Voluptates molestiae deleniti, cupiditate a incidunt error repellendus necessitatibus nulla
+                            ad temporibus cumque voluptatem! Et enim ex temporibus omnis consequuntur!</p>
+                        <a href="#" class="btn btn-success">MAS</a>
+                    </div>
+                </div>
             </aside>
         </section>
     </div>

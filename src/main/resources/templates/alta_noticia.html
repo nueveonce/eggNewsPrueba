@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="UTF-8">
@@ -20,16 +20,31 @@
                 </div>
                 <div class="mb-3">
                     <label for="resumen_noticia" class="form-label">RESUMEN</label>
-                    <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia">
+                    <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia" >
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">CUERPO DE NOTICIA</span>
-                    <textarea class="form-control" name="cuerpo" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20"></textarea>
                 </div>
+                <br>
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" id="inputGroupFile02">
                     <label class="input-group-text" for="inputGroupFile02">SUBIR</label>
                 </div>
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title"> ERROR </h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div th:if="${exito!=null}" class="card text-white bg-success mb-3 mensajeExito">
+                    <div class="card-body">
+                        <h5 class="card-title"> EXITO </h5>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+
+                
                 <button type="text" class="btn btn-primary">ACEPTAR</button>
 
             </form>
