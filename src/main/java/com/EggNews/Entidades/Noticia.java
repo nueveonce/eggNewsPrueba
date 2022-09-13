@@ -73,6 +73,11 @@ public class Noticia {
         this.imagen = imagen;
     }
 
+    @Override
+    public String toString() {
+        return "Noticia{" + "id_noticia=" + id_noticia + ", titulo=" + titulo + ", resumen=" + resumen + ", cuerpo=" + cuerpo + ", fecha_noticia=" + fecha_noticia + ", imagen=" + imagen + '}';
+    }
+
  
     
 }
