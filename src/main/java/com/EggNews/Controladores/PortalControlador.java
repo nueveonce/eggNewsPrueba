@@ -19,7 +19,7 @@ public class PortalControlador {
     @GetMapping("/")
     public String index(ModelMap modelo) {
          List<Noticia> noticia= notServ.listarNoticias();
-         System.out.println(noticia.toString());
+         
          modelo.addAttribute("noticia",noticia);
         return "index.html";
     }

@@ -36,5 +36,11 @@ public class NoticiaControlador {
         }
         return "index.html";
     }
-
+    
+    @GetMapping("/noticiaCompleta")
+    public String noticiaCompleta(@RequestParam String id_noticia/*, ModelMap modelo*/) {
+        
+        
+        return "noticia/noticia_completa.html";
+    }
 }
