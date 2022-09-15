@@ -1,5 +1,6 @@
 package com.EggNews.Controladores;
 
+import com.EggNews.Entidades.Noticia;
 import com.EggNews.Excepciones.MiException;
 import com.EggNews.Servicios.NoticiaServicios;
 import java.util.logging.Level;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +39,13 @@ public class NoticiaControlador {
         return "index.html";
     }
     
-    @GetMapping("/noticiaCompleta")
-    public String noticiaCompleta(@RequestParam String id_noticia/*, ModelMap modelo*/) {
-        
-        
-        return "noticia/noticia_completa.html";
+    @GetMapping("/completa/{id_noticia}")
+    public String completa(@PathVariable String id_noticia, ModelMap modelo) {
+        System.out.println("HOLAAAAAAA");
+        Noticia noticia= new Noticia();
+        noticia=notServ.getOne(id_noticia);
+        modelo.addAttribute(noticia);
+        System.out.println(noticia.toString());
+        return "completa.html";
     }
 }

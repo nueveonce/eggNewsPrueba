@@ -47,9 +47,13 @@ public class NoticiaServicios {
         return noticias;
     }
 
+    public Noticia getOne(String id) {
+        return noticiaRepositorio.getOne(id);
+    }
+
     @Transactional
     public void modificarNoticia(String titulo, String resumen, String cuerpo, /*String imgen,*/ String idNoticia) throws MiException {
-        
+
         validarDatos(titulo, resumen, cuerpo);
         Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
 
