@@ -13,16 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class PortalControlador {
 
-     @Autowired
+    @Autowired
     private NoticiaServicios notServ;
-    
+
     @GetMapping("/")
     public String index(ModelMap modelo) {
-         List<Noticia> noticia= notServ.listarNoticias();
-         
-         modelo.addAttribute("noticia",noticia);
+        List<Noticia> noticia = notServ.listarNoticias();
+
+        modelo.addAttribute("noticia", noticia);
         return "index.html";
     }
 
+    @GetMapping("/registrar")
+    public String retistrar(){
+        return "registrar";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
 }
- 

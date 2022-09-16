@@ -5,10 +5,13 @@
  */
 package com.EggNews.Entidades;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Roberto
  */
+@Entity
 public class Administrador extends Usuario{
     
 }

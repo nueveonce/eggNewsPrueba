@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,6 +22,8 @@ public class Noticia {
     @Temporal(TemporalType.DATE)
     private Date fecha_noticia;
     private String imagen;
+    @ManyToOne
+    private Periodista creador;
 
     public Noticia() {
     }
