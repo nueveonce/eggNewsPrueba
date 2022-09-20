@@ -2,62 +2,68 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>EGG NEWS - BIENVENIDO</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="\personalizados.css">
-</head>
+    <head>
+        <title>EGG NEWS - BIENVENIDO</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <link rel="stylesheet" href="\personalizados.css">
+    </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark  shadow rounded">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/}">EGG - NEWS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="#">Sign in</a>
-                    <a class="nav-link" href="#">Log in</a>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  shadow rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">EGG - NEWS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="#">Sign in</a>
+                        <a class="nav-link" href="#">Log in</a>
+                    </div>
                 </div>
             </div>
+        </nav>
+        <div class="container p-4 m-4">
+            <form  action="/noticia/altanoticia" method="post">
+                <div class="mb-2">
+                    <label for="titulo_noticia" class="form-label">TITULO DE LA NOTICIA</label>
+                    <input type="text" class="form-control" name="titulo_noticia" id="titulo_noticia">
+                </div>
+                <div class="mb-2">
+                    <label for="resumen_noticia" class="form-label">RESUMEN</label>
+                    <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">CUERPO DE NOTICIA</span>
+                    <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20"></textarea>
+                </div>
+                <br>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02">
+                    <label class="input-group-text" for="inputGroupFile02">SUBIR</label>
+                </div>
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title"> ERROR </h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning">ACEPTAR</button>
+            </form>
         </div>
-    </nav>
-    <div class="container p-4 m-4">
-        <form  action="/noticia/altanoticia" method="post">
-            <div class="mb-2">
-                <label for="titulo_noticia" class="form-label">TITULO DE LA NOTICIA</label>
-                <input type="text" class="form-control" name="titulo_noticia" id="titulo_noticia">
-            </div>
-            <div class="mb-2">
-                <label for="resumen_noticia" class="form-label">RESUMEN</label>
-                <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia">
-            </div>
-            <div class="input-group">
-                <span class="input-group-text">CUERPO DE NOTICIA</span>
-                <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20"></textarea>
-            </div>
-            <br>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control" id="inputGroupFile02">
-                <label class="input-group-text" for="inputGroupFile02">SUBIR</label>
-            </div>
-            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                <div class="card-body">
-                    <h5 class="card-title"> ERROR </h5>
-                    <p class="card-text" th:text="${error}"></p>
-                </div>
-            </div>
-            <button type="text" class="btn btn-warning">ACEPTAR</button>
 
-        </form>
-    </div>
-
-</body>
+    </body>
 
 </html>

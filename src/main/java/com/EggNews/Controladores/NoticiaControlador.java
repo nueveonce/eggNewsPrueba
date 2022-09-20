@@ -26,13 +26,13 @@ public class NoticiaControlador {
         return "alta_noticia.html";
     }
 
-    @PostMapping("/altanoticia")
+    @PostMapping("/altanoticia/")
     public String altanoticia(@RequestParam String titulo_noticia, @RequestParam String resumen_noticia, @RequestParam String cuerpo, ModelMap modelo) {
         try {
             notServ.crearNoticia(titulo_noticia, resumen_noticia, cuerpo);
-            modelo.put("exito", "El libro fue cargado correctamente"); //(llave, valor)
+            modelo.put("exito", "La noticia fue cargada correctamente"); //(llave, valor)
         } catch (MiException ex) {
-            //Logger.getLogger(NoticiaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NoticiaControlador.class.getName()).log(Level.SEVERE, null, ex);
             modelo.put("error", ex.getMessage());
         return "alta_noticia.html";
         }
@@ -41,7 +41,7 @@ public class NoticiaControlador {
     
     @GetMapping("/completa/{id_noticia}")
     public String completa(@PathVariable String id_noticia, ModelMap modelo) {
-        System.out.println("HOLAAAAAAA");
+        
         Noticia noticia= new Noticia();
         noticia=notServ.getOne(id_noticia);
         modelo.addAttribute(noticia);

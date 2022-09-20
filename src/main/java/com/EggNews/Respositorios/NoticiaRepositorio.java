@@ -1,6 +1,7 @@
 package com.EggNews.Respositorios;
 
 import com.EggNews.Entidades.Noticia;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,8 +15,8 @@ public interface NoticiaRepositorio extends JpaRepository<Noticia, String>{
     @Query("SELECT n FROM Noticia n WHERE n.titulo =  :titulo")
     public Noticia buscarPorTitulo(@Param("titulo") String titulo);
     
-//    @Query("SELECT n FROM Noticia n WHERE n.fecha_noticia = :fecha")
-//    public List<Noticia> buscarPorFecha(@Param("fecha_noticia") String  fecha);
+  //  @Query("SELECT n FROM Noticia n WHERE n.fecha_noticia = :fecha")
+  //  public List<Noticia> buscarPorFecha(@Param("fecha_noticia") Date  fecha);
         
     
 

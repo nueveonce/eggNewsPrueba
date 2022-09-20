@@ -53,6 +53,14 @@ public class Usuario {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Date getFechaAlta() {
         return fechaAlta;
     }
@@ -68,6 +76,7 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
 
     
 }

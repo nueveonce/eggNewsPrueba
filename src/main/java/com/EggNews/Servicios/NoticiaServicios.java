@@ -1,6 +1,7 @@
 package com.EggNews.Servicios;
 
 import com.EggNews.Entidades.Noticia;
+import com.EggNews.Entidades.Periodista;
 import com.EggNews.Excepciones.MiException;
 import com.EggNews.Respositorios.NoticiaRepositorio;
 import java.util.ArrayList;
@@ -29,12 +30,14 @@ public class NoticiaServicios {
     public void crearNoticia(String titulo, String resumen, String cuerpo/*, String imgen*/) throws MiException {
         validarDatos(titulo, resumen, cuerpo);
         Noticia noticia = new Noticia();
+        Periodista periodista= new Periodista();
 
         noticia.setTitulo(titulo);
         noticia.setResumen(resumen);
         noticia.setCuerpo(cuerpo);
         noticia.setFecha_noticia(new Date());
         //noticia.setImagen(imgen);
+        //noticia.setCreador(periodista);
 
         noticiaRepositorio.save(noticia);
 

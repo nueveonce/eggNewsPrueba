@@ -26,6 +26,7 @@ public class Noticia {
     private Periodista creador;
 
     public Noticia() {
+        
     }
 
     public String getId_noticia() {
@@ -76,11 +77,12 @@ public class Noticia {
         this.imagen = imagen;
     }
 
-    @Override
-    public String toString() {
-        return "Noticia{" + "id_noticia=" + id_noticia + ", titulo=" + titulo + ", resumen=" + resumen + ", cuerpo=" + cuerpo + ", fecha_noticia=" + fecha_noticia + ", imagen=" + imagen + '}';
+    public Periodista getCreador() {
+        return creador;
     }
 
- 
-    
+    public void setCreador(Periodista creador) {
+        this.creador = creador;
+    }
+
 }
