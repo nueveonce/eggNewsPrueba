@@ -33,7 +33,7 @@ public class PortalControlador {
 
         modelo.addAttribute("noticia", noticia);
         if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/";
+            return "index.html";
         } else {
             return "index.html";
         }

@@ -1,5 +1,6 @@
 package com.EggNews.Servicios;
 
+import com.EggNews.Entidades.Imagen;
 import com.EggNews.Entidades.Usuario;
 import com.EggNews.Excepciones.MiException;
 import com.EggNews.Respositorios.UsuarioRepositorio;
@@ -20,14 +21,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    
+    @Autowired
+    private ImagenServicio imagenServicio;
 
     @Transactional
-    public void registrar(String nombre, String email, String password, String password2) throws MiException {
+    public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MiException {
 
         validarDatos(nombre, email, password, password2);
 
@@ -39,6 +44,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setFechaAlta(new Date());
         usuario.setRol(Rol.USER);
+        Imagen imagen= imagenServicio.guardar(archivo);
+        
+        usuario.setImagen(imagen);
+        
 
         usuarioRepositorio.save(usuario);
 

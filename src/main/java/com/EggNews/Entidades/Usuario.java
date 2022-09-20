@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,6 +26,8 @@ public class Usuario {
     protected Date fechaAlta;
     @Enumerated(EnumType.STRING)
     protected Rol rol;
+    @OneToOne
+    protected Imagen imagen;
 
     public Usuario() {
     }
@@ -77,6 +80,12 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public Imagen getImagen() {
+        return imagen;
+    }
 
-    
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+
 }

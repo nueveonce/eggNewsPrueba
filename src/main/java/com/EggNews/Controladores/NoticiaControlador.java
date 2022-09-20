@@ -26,7 +26,7 @@ public class NoticiaControlador {
         return "alta_noticia.html";
     }
 
-    @PostMapping("/altanoticia/")
+    @PostMapping("/altanoticia")
     public String altanoticia(@RequestParam String titulo_noticia, @RequestParam String resumen_noticia, @RequestParam String cuerpo, ModelMap modelo) {
         try {
             notServ.crearNoticia(titulo_noticia, resumen_noticia, cuerpo);
