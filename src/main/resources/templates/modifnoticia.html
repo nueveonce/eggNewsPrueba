@@ -15,27 +15,29 @@
     <body sec:authorize="hasRole('ADMIN')">
         <nav th:replace ="/fragments/nav :: nav"> </nav>
         <div class="container p-4 m-4">
-            <form  th:action="@{/noticia/altanoticia}" method="POST" enctype="multipart/form-data">
+            <form  th:action="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" method="post">
                 <div class="mb-2">
                     <label for="titulo_noticia" class="form-label">TITULO DE LA NOTICIA</label>
-                    <input type="text" class="form-control" name="titulo_noticia" id="titulo_noticia">                    
+                    <input type="text" class="form-control" name="titulo_noticia" id="titulo_noticia"  th:value="${noticia.titulo}">                    
+                    <input hidden th:value="${id_noticia}" name="id">
+
                 </div>
                 <div class="mb-2">
                     <label for="resumen_noticia" class="form-label">RESUMEN</label>
-                    <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia">
+                    <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia" th:value="${noticia.resumen}">
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">CUERPO DE NOTICIA</span>
-                    <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20"></textarea>
+                    <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20" th:text="${noticia.cuerpo}"></textarea>
                 </div>
                 <br>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">SUBIR IMAGEN</label>
+                    <input type="file" class="form-control" id="inputGroupFile02">
+                    <label class="input-group-text" for="inputGroupFile02">SUBIR</label>
                 </div>
-                    <input type="file" name="archivo" class="form-control" id="inputGroupFile02">
                 <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
                     <div class="card-body">
-                        <h5 class="card-title"> Error </h5>
+                        <h5 class="card-title"> ERROR </h5>
                         <p class="card-text" th:text="${error}"></p>
                     </div>
                     <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
@@ -46,6 +48,7 @@
 
                     </div>
                 </div>
+
                 <button type="submit" class="btn btn-warning">ACEPTAR</button>
             </form>
         </div>

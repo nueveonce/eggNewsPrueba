@@ -1,0 +1,17 @@
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  shadow rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">EGG - NEWS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">                    
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" th:if="${session.usuariosession == null}" th:href="@{/registrar}">REGISTRARSE</a>
+                        <a class="nav-link" th:if="${session.usuariosession == null}" th:href="@{/login}">INICIAR SESION</a>
+                        <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/altanoticia}">ALTA NOTICIA - </a>
+                        <a class="nav-link" th:if="${session.usuariosession != null}" th:href="@{/logout}">CERRAR SESION</a>
+                    </div>
+                </div>
+            </div>
+        </nav>

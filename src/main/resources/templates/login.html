@@ -11,22 +11,7 @@
         <link rel="stylesheet" href="personalizados.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  shadow rounded">
-            <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}">EGG - NEWS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link" th:href="@{/registrar}">REGISTRARSE</a>
-                        <a class="nav-link" th:href="@{/login}">INICIAR SESION</a>
-
-                    </div>
-                </div>
-            </div>
-        </nav>
+     <nav th:replace ="/fragments/nav :: nav"> </nav>
         <header>
             <div class="container">
                 <h1>INICIO DE SESION DE EGG-NEWS</h1>
@@ -45,7 +30,7 @@
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Ingrese su email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="E-MAIL">
+                                    <input type="email" name="email" class="form-control" placeholder="E-MAIL"> 
 
                                     <label for="password" class="form-label">Contraseña</label>
                                     <input type="password" name="password" class="form-control" placeholder="CONTRASEÑA">

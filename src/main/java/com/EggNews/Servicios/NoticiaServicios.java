@@ -1,5 +1,6 @@
 package com.EggNews.Servicios;
 
+import com.EggNews.Entidades.Imagen;
 import com.EggNews.Entidades.Noticia;
 import com.EggNews.Entidades.Periodista;
 import com.EggNews.Excepciones.MiException;
@@ -11,6 +12,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class NoticiaServicios {
@@ -20,6 +22,8 @@ public class NoticiaServicios {
      */
 
     private NoticiaRepositorio noticiaRepositorio;
+    @Autowired
+    private ImagenServicio imagenServ;
 
     @Transactional/* si el metodo se ejecuta sin lanzar excepciones, 
     se realiza un commit a la base de datos, de lo contrario no se aplican 
@@ -27,17 +31,18 @@ public class NoticiaServicios {
     TODOS LOS METODOS QUE GENEREN MODIFICACIONES PERMANENTES EN LA BASE DE DATOS DEBEN SER
     ANOTADOS COMO TRANSACTIONAL
      */
-    public void crearNoticia(String titulo, String resumen, String cuerpo/*, String imgen*/) throws MiException {
-        validarDatos(titulo, resumen, cuerpo);
+
+    public void crearNoticia(MultipartFile archivo, String titulo, String resumen, String cuerpo) throws MiException {
+        validarDatos(archivo,titulo, resumen, cuerpo);
         Noticia noticia = new Noticia();
-        Periodista periodista= new Periodista();
+        Periodista periodista = new Periodista();
 
         noticia.setTitulo(titulo);
         noticia.setResumen(resumen);
         noticia.setCuerpo(cuerpo);
         noticia.setFecha_noticia(new Date());
-        //noticia.setImagen(imgen);
-        //noticia.setCreador(periodista);
+        Imagen imagen = imagenServ.guardar(archivo);
+        noticia.setImagen(imagen);
 
         noticiaRepositorio.save(noticia);
 
@@ -55,9 +60,9 @@ public class NoticiaServicios {
     }
 
     @Transactional
-    public void modificarNoticia(String titulo, String resumen, String cuerpo, /*String imgen,*/ String idNoticia) throws MiException {
+    public void modificarNoticia(MultipartFile archivo, String titulo, String resumen, String cuerpo, String idNoticia) throws MiException {
 
-        validarDatos(titulo, resumen, cuerpo);
+        validarDatos(archivo,titulo, resumen, cuerpo);
         Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
 
         if (respuesta.isPresent()) {
@@ -67,13 +72,20 @@ public class NoticiaServicios {
             noticia.setTitulo(titulo);
             noticia.setResumen(resumen);
             noticia.setCuerpo(cuerpo);
-            //noticia.setImagen(imgen);
+
+            String idImagen = null;
+            if (noticia.getImagen() != null) {
+                idImagen = noticia.getImagen().getId();
+            }
+            Imagen imagen = imagenServ.actualizar(archivo, idImagen);
+
+            noticia.setImagen(imagen);
 
             noticiaRepositorio.save(noticia);
         }
     }
 
-    public void validarDatos(String titulo, String resumen, String cuerpo) throws MiException {
+    public void validarDatos(MultipartFile archivo, String titulo, String resumen, String cuerpo) throws MiException {
 
         if (titulo == null || titulo.isEmpty()) {
             throw new MiException("EL TITULO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
@@ -85,6 +97,9 @@ public class NoticiaServicios {
 
         if (cuerpo.isEmpty() || cuerpo == null) {
             throw new MiException("EL CUERPO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+        }
+        if (archivo.isEmpty() || archivo == null) {
+            throw new MiException("EL ******* archivo ********** DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
         }
 
     }

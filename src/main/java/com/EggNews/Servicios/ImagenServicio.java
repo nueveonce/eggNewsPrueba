@@ -19,9 +19,9 @@ public class ImagenServicio {
             try {
                 Imagen imagen= new Imagen();
                 
-                imagen.setMine(archivo.getContentType());
-                imagen.setNombre(archivo.getName());
-                imagen.setContenido(archivo.getBytes());
+                imagen.setMine(archivo.getContentType());//tipo de contenido
+                imagen.setNombre(archivo.getName());// seteamo nombre
+                imagen.setContenido(archivo.getBytes());//contenido
                 return imagenrepositorio.save(imagen);
             } catch (Exception e) {
                 System.err.println(e.getMessage());

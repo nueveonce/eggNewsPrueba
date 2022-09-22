@@ -11,24 +11,7 @@
         <link rel="stylesheet" href="personalizados.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark  shadow rounded">
-            <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}">EGG - NEWS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <!-- <p class="text-center" th:if="${session.usuariosession != null}" th:text="'Hola,  '+ ${session.usuariosession.email}"></p>-->
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link" th:if="${session.usuariosession == null}" th:href="@{/registrar}">REGISTRARSE</a>
-                        <a class="nav-link" th:if="${session.usuariosession == null}" th:href="@{/login}">INICIAR SESION</a>
-                        
-                        <a class="nav-link" th:if="${session.usuariosession != null}" th:href="@{/logout}">CERRAR SESION</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <nav th:replace ="/fragments/nav :: nav"> </nav>
         <header>
             <div class="container">
                 <h1>EGG NEWS</h1>
@@ -38,7 +21,7 @@
         <div>
             <div class="container" th:each="noticia : ${noticia}">
                 <section class="main row">
-                    <article class="col-md-10">
+                    <article>
                         <div class="card  shadow p-1 mb-3 bg-body rounded">
                             <div class="card-header" th:text="${noticia.fecha_noticia}">
                             </div>
@@ -47,7 +30,7 @@
                                 <p class="card-text" th:text="${noticia.resumen}"></p>
                                 <a th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-warning">Seguir leyendo</a>
                                 <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-danger">Eliminar</a>
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-success">Modificar</a>
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" class="btn btn-success">Modificar</a>
                             </div>
                         </div>
                     </article>
