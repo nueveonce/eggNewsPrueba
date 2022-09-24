@@ -28,9 +28,11 @@
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${noticia.titulo}"></h5>
                                 <p class="card-text" th:text="${noticia.resumen}"></p>
-                                <a th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-warning">Seguir leyendo</a>
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-danger">Eliminar</a>
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" class="btn btn-success">Modificar</a>
+                                <div class="d-grid gap-2">
+                                    <a th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-warning btn-sm">Seguir leyendo</a>
+                                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" class="btn btn-outline-secondary btn-sm">Modificar</a>
+                                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/noticia/completa/__${noticia.id_noticia}__}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                </div>
                             </div>
                         </div>
                     </article>

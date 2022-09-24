@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <title>EGG NEWS - ALTA DE NOTICIA</title>
@@ -15,26 +15,31 @@
     <body sec:authorize="hasRole('ADMIN')">
         <nav th:replace ="/fragments/nav :: nav"> </nav>
         <div class="container p-4 m-4">
-            <form  th:action="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" method="post">
+            <form  th:action="@{/noticia/modifnoticia/__${noticia.id_noticia}__}" method="POST" enctype="multipart/form-data">
+
                 <div class="mb-2">
                     <label for="titulo_noticia" class="form-label">TITULO DE LA NOTICIA</label>
+                    <input hidden th:value="${id_noticia}" name="id_noticia">
                     <input type="text" class="form-control" name="titulo_noticia" id="titulo_noticia"  th:value="${noticia.titulo}">                    
-                    <input hidden th:value="${id_noticia}" name="id">
+
 
                 </div>
                 <div class="mb-2">
                     <label for="resumen_noticia" class="form-label">RESUMEN</label>
                     <input type="text" class="form-control" name="resumen_noticia" id="resumen_noticia" th:value="${noticia.resumen}">
                 </div>
+                
                 <div class="input-group">
                     <span class="input-group-text">CUERPO DE NOTICIA</span>
                     <textarea class="form-control" name="cuerpo" aria-label="With textarea" rows="20" th:text="${noticia.cuerpo}"></textarea>
                 </div>
+                
                 <br>
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" id="inputGroupFile02">
-                    <label class="input-group-text" for="inputGroupFile02">SUBIR</label>
+                    <label class="input-group-text" name="archivo" for="inputGroupFile02">SUBIR</label>
                 </div>
+                
                 <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
                     <div class="card-body">
                         <h5 class="card-title"> ERROR </h5>
@@ -49,7 +54,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning">ACEPTAR</button>
+                <button type="submit" class="btn btn-warning">ACTUALIZAR</button>
             </form>
         </div>
 

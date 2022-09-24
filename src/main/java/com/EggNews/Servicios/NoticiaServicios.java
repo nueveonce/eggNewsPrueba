@@ -33,7 +33,7 @@ public class NoticiaServicios {
      */
 
     public void crearNoticia(MultipartFile archivo, String titulo, String resumen, String cuerpo) throws MiException {
-        validarDatos(archivo,titulo, resumen, cuerpo);
+        validarDatos(/*archivo, */titulo, resumen, cuerpo);
         Noticia noticia = new Noticia();
         Periodista periodista = new Periodista();
 
@@ -61,8 +61,8 @@ public class NoticiaServicios {
 
     @Transactional
     public void modificarNoticia(MultipartFile archivo, String titulo, String resumen, String cuerpo, String idNoticia) throws MiException {
-
-        validarDatos(archivo,titulo, resumen, cuerpo);
+       
+        validarDatos(titulo, resumen, cuerpo);
         Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
 
         if (respuesta.isPresent()) {
@@ -85,7 +85,7 @@ public class NoticiaServicios {
         }
     }
 
-    public void validarDatos(MultipartFile archivo, String titulo, String resumen, String cuerpo) throws MiException {
+    public void validarDatos(String titulo, String resumen, String cuerpo) throws MiException {
 
         if (titulo == null || titulo.isEmpty()) {
             throw new MiException("EL TITULO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
@@ -98,9 +98,9 @@ public class NoticiaServicios {
         if (cuerpo.isEmpty() || cuerpo == null) {
             throw new MiException("EL CUERPO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
         }
-        if (archivo.isEmpty() || archivo == null) {
-            throw new MiException("EL ******* archivo ********** DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
-        }
+//        if (archivo.isEmpty() || archivo == null) {
+//            throw new MiException("EL ******* archivo ********** DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+//        }
 
     }
 

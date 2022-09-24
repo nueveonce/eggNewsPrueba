@@ -6,6 +6,7 @@ import com.EggNews.Servicios.NoticiaServicios;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
@@ -43,25 +44,28 @@ public class NoticiaControlador {
 
     @GetMapping("/modifnoticia/{id_noticia}") //localhost:8080/noticia/modfnoticia
     public String modifnoticia(@PathVariable String id_noticia, ModelMap modelo) {
+        
         Noticia noticia = new Noticia();
         noticia = notServ.getOne(id_noticia);
+        System.out.println("******** " + noticia.toString());
         modelo.addAttribute(noticia);   
         
 
         return "modifnoticia.html";
     }
-    /*
+
     @PostMapping("/modifnoticia/{id_noticia}")
-    public String modifnoticia(MultipartFile archivo, @RequestParam String titulo_noticia, @RequestParam String resumen_noticia, @RequestParam String cuerpo, ModelMap modelo){
+    public String modifnoticia(@PathVariable String id_noticia, @RequestParam String titulo_noticia, @RequestParam String resumen_noticia, @RequestParam String cuerpo,MultipartFile archivo,  ModelMap modelo){
         try {
-            notServ.modificarNoticia(archivo,titulo_noticia, resumen_noticia, cuerpo);
-            return "completa.html";
+            
+            notServ.modificarNoticia(archivo, titulo_noticia, resumen_noticia, cuerpo, id_noticia);
+            return "redirect:/noticia/completa/{id_noticia}";
         } catch (MiException ex) {
             Logger.getLogger(NoticiaControlador.class.getName()).log(Level.SEVERE, null, ex);
-            return "modifnoticia.html";
+            return "redirect:/noticia/completa";
         }
     }
-*/
+
     @GetMapping("/completa/{id_noticia}")
     public String completa(@PathVariable String id_noticia, ModelMap modelo) {
 
@@ -70,6 +74,8 @@ public class NoticiaControlador {
         modelo.addAttribute(noticia);        
         return "completa.html";
     }
-    
-   
+/*   @PreAuthorize
+   @GetMapping
+   public String  
+  */ 
 }
