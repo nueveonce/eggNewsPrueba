@@ -3,5 +3,6 @@ package com.EggNews.enumeraciones;
 
 public enum Rol {
     USER,
-    ADMIN;
+    PERIODISTA,
+    ADMIN;    
 }

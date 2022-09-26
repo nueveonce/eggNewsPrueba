@@ -6,7 +6,7 @@ import com.EggNews.Servicios.NoticiaServicios;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
@@ -73,6 +73,12 @@ public class NoticiaControlador {
         noticia = notServ.getOne(id_noticia);
         modelo.addAttribute(noticia);        
         return "completa.html";
+    }
+    
+    @GetMapping("/eliminar/{id_noticia}")
+    public String eliminar(@PathVariable String id_noticia){
+        notServ.eliminar(id_noticia);
+        return "redirect:/";
     }
 /*   @PreAuthorize
    @GetMapping

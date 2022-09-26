@@ -52,7 +52,7 @@ public class PortalControlador {
         try {
             usuarioServ.registrar(archivo, nombre, email, password, password2);
             modelo.put("exito", "Usuario resitrado exitosamente");
-            return "index.html";
+            return "redirect:/";
 
         } catch (MiException ex) {
             //Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE, null, ex);

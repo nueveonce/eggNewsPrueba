@@ -15,10 +15,10 @@ public class Imagen {
     @GeneratedValue(generator = "uuid") // el valor del ID se va a generar de manera automatica.
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private String mine;
+    private String mine; // asigna el formato del archivo de la imagen
     private String nombre;
     @Lob @Basic(fetch = FetchType.LAZY)
-    private byte[] contenido;
+    private byte[] contenido;  
 
     public Imagen() {
     }

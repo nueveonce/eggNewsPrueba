@@ -52,6 +52,16 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
 
     }
+    
+    public List<Usuario> listar(){
+        List<Usuario> usuarios = new ArrayList();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+    }
+    
+    public void eliminar(String id){
+        usuarioRepositorio.deleteById(id);
+    }
 
     public void validarDatos(String nombre, String email, String password, String password2) throws MiException {
 

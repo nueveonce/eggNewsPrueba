@@ -58,6 +58,10 @@ public class NoticiaServicios {
     public Noticia getOne(String id) {
         return noticiaRepositorio.getOne(id);
     }
+    
+    public void eliminar(String id){
+        noticiaRepositorio.deleteById(id);
+    }
 
     @Transactional
     public void modificarNoticia(MultipartFile archivo, String titulo, String resumen, String cuerpo, String idNoticia) throws MiException {
