@@ -26,10 +26,11 @@ public class ImagenControlador {
         
         byte[] imagen = noticia.getImagen().getContenido();
         
-        HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders(); // estas cabeceras le dicen al 
+                                                 // navegador que estamos devolviendo una imagen
         
-        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentType(MediaType.IMAGE_JPEG); 
         
-        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);  //retornamos una responseEntity de bytes
     }
 }

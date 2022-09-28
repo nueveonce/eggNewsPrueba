@@ -27,23 +27,23 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <form th:action="@{/registro}" method="POST" enctype="multipart/form-data">
+                            <form th:action="@{/admin/modificar_usuario/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="input" name="nombre" class="form-control" id="nombre" placeholder="Nombre" th:value="${usuario.nombre}">
 
                                     <label for="email" class="form-label">email</label>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="mail@proveedor.com" th:value="${usuario.email}">
-                                    
+
                                     <label for="archivo" class="form-label">Selecccione su imagen de perfil</label>
                                     <input type="file" name="archivo" class="form-control">
-<!--
+<!--                                    
                                     <label for="pass" class="form-label">Contraseña</label>
                                     <input type="password" name="password" class="form-control" id="pass" placeholder="Minimo 6 caracteres">
 
                                     <label for="pass2" class="form-label">Repetir Contraseña</label>
                                     <input type="password" name="password2" class="form-control" id="pass2" placeholder="Repetir Contraseña">
--->                                
+-->                                 <input type="hidden" th:value="${usuario.id}" name="id">
                                 </div>
                                 <button type="submit" class="btn btn-warning">ACEPTAR</button>
                             </form>

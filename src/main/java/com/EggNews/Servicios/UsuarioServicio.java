@@ -8,6 +8,7 @@ import com.EggNews.enumeraciones.Rol;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,9 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
+
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-    
+
     @Autowired
     private ImagenServicio imagenServicio;
 
@@ -36,7 +38,6 @@ public class UsuarioServicio implements UserDetailsService {
 
         validarDatos(nombre, email, password, password2);
 
-        
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
@@ -44,22 +45,22 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setFechaAlta(new Date());
         usuario.setRol(Rol.USER);
-        Imagen imagen= imagenServicio.guardar(archivo);
-        
+        Imagen imagen = imagenServicio.guardar(archivo);
+
         usuario.setImagen(imagen);
-        
 
         usuarioRepositorio.save(usuario);
 
     }
-    
-    public List<Usuario> listar(){
+
+    public List<Usuario> listar() {
         List<Usuario> usuarios = new ArrayList();
         usuarios = usuarioRepositorio.findAll();
         return usuarios;
     }
-    
-    public void eliminar(String id){
+
+    @Transactional
+    public void eliminar(String id) {
         usuarioRepositorio.deleteById(id);
     }
 
@@ -91,19 +92,49 @@ public class UsuarioServicio implements UserDetailsService {
             List<GrantedAuthority> permisos = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
-                
+
             /*atrapammos al usuario que inicio sesion y lo guardamos en la sesion web*/
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", usuario);
-            
-            User user = new User(usuario.getEmail(),usuario.getPassword(),permisos);
-            
+
+            User user = new User(usuario.getEmail(), usuario.getPassword(), permisos);
+
             return user;
-                    
+
         } else {
-             return null;
+            return null;
         }
     }
 
+    public void modificarUsuario(MultipartFile archivo, String id, String nombre, String email) throws MiException {
+        validarDatos(id, nombre, email);
+        Optional<Usuario> respuesta= usuarioRepositorio.findById(id);
+        
+        if (respuesta.isPresent()) {
+            Usuario usuario= respuesta.get();
+            
+            usuario.setNombre(nombre);
+            usuario.setEmail(email);
+            usuarioRepositorio.save(usuario);
+        }
+    }
+
+    public void validarDatos(String id, String nombre, String email) throws MiException {
+
+        if (id == null || id.isEmpty()) {
+            throw new MiException("EL TITULO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+        }
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("EL RESUMEN DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+        }
+
+        if (email.isEmpty() || email == null) {
+            throw new MiException("EL CUERPO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+        }
+//        if (archivo.isEmpty() || archivo == null) {
+//            throw new MiException("EL ******* archivo ********** DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+//        }
+    }
 }

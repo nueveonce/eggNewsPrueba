@@ -50,7 +50,7 @@ public class NoticiaServicios {
 
     public List<Noticia> listarNoticias() {
         List<Noticia> noticias = new ArrayList();
-        noticias = noticiaRepositorio.findAll();
+        noticias = noticiaRepositorio.findAll();       
 
         return noticias;
     }

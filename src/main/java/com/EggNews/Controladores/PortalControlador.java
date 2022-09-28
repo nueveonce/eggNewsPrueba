@@ -68,7 +68,6 @@ public class PortalControlador {
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         if (error != null) {
             modelo.put("error", "USUARIO o contraseña invalidos");
-
         }
         return "/login";
     }
