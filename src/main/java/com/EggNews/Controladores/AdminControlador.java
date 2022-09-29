@@ -48,10 +48,10 @@ public class AdminControlador {
     }
 
     @PostMapping("/modificar_usuario/{id}")
-    public String modificarUsuario(MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email) {
+    public String modificarUsuario(MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email, @RequestParam String tipo_usuario) {
 
         try {
-            usuarioServicio.modificarUsuario(archivo, id, nombre, email);
+            usuarioServicio.modificarUsuario(archivo, id, nombre, email, tipo_usuario);
             return "redirect:/admin/usuarios";
         } catch (MiException ex) {
             Logger.getLogger(AdminControlador.class.getName()).log(Level.SEVERE, null, ex);

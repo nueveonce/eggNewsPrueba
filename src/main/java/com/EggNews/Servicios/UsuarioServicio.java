@@ -107,32 +107,37 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    public void modificarUsuario(MultipartFile archivo, String id, String nombre, String email) throws MiException {
-        validarDatos(id, nombre, email);
-        Optional<Usuario> respuesta= usuarioRepositorio.findById(id);
-        
+    public void modificarUsuario(MultipartFile archivo, String id, String nombre, String email, String tipo_usuario) throws MiException {
+        validarDatos2(id, nombre, email, tipo_usuario);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
         if (respuesta.isPresent()) {
-            Usuario usuario= respuesta.get();
+            Usuario usuario = respuesta.get();            
             
             usuario.setNombre(nombre);
             usuario.setEmail(email);
+            usuario.setRol(Rol.conversion(tipo_usuario));
             usuarioRepositorio.save(usuario);
         }
     }
 
-    public void validarDatos(String id, String nombre, String email) throws MiException {
+    public void validarDatos2(String id, String nombre, String email, String tipo_usuario) throws MiException {
 
         if (id == null || id.isEmpty()) {
-            throw new MiException("EL TITULO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+            throw new MiException("EL ID DE USUARIO NO DEBE SER NULO NI ESTAR VACIO");
         }
 
         if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("EL RESUMEN DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+            throw new MiException("EL NOMBRE NO DEBE SER NULO NI ESTAR VACIO");
         }
 
         if (email.isEmpty() || email == null) {
-            throw new MiException("EL CUERPO DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
+            throw new MiException("EL E-MAIL NO DEBE SER NULO NI ESTAR VACIO");
         }
+        if (tipo_usuario == null || tipo_usuario.isEmpty()) {
+            throw new MiException("EL TIPO DE USUARIO NO PUEDE SER NULO NI ESTAR VACIO");
+        }
+
 //        if (archivo.isEmpty() || archivo == null) {
 //            throw new MiException("EL ******* archivo ********** DE LA NOTICIA NO DEBE SER NULO NI ESTAR VACIO");
 //        }
